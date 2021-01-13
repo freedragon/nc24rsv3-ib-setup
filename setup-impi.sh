@@ -54,6 +54,27 @@ sed -i -e 's/ACCEPT_EULA=decline/ACCEPT_EULA=accept/g' silent.cfg
 ./install.sh --silent ./silent.cfg
 cd ..
 
+# Module Files
+MODULE_FILES_DIRECTORY=/usr/share/modules/modulefiles/mpi
+mkdir -p ${MODULE_FILES_DIRECTORY}
+
+# Intel 2019
+cat << EOF >> ${MODULE_FILES_DIRECTORY}/impi_${IMPI_2019_VERSION}
+#%Module 1.0
+#
+#  Intel MPI ${IMPI_2019_VERSION}
+#
+conflict        mpi
+module load /opt/intel/impi/${IMPI_2019_VERSION}/intel64/modulefiles/mpi
+setenv          MPI_BIN         /opt/intel/impi/${IMPI_2019_VERSION}/intel64/bin
+setenv          MPI_INCLUDE     /opt/intel/impi/${IMPI_2019_VERSION}/intel64/include
+setenv          MPI_LIB         /opt/intel/impi/${IMPI_2019_VERSION}/intel64/lib
+setenv          MPI_MAN         /opt/intel/impi/${IMPI_2019_VERSION}/man
+setenv          MPI_HOME        /opt/intel/impi/${IMPI_2019_VERSION}/intel64
+EOF
+
+ln -s ${MODULE_FILES_DIRECTORY}/impi_${IMPI_2019_VERSION} ${MODULE_FILES_DIRECTORY}/impi-2019
+
 # install Intel libraries
 MKL_DOWNLOAD_URL=http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/15816/l_mkl_2019.5.281.tgz
 wget --retry-connrefused --tries=3 --waitretry=5 $MKL_DOWNLOAD_URL
