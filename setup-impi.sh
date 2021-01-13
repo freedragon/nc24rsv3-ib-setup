@@ -31,7 +31,7 @@ apt-get -y install numactl \
                    gfortran
 
 # install mellanox ofed
-MLNX_OFED_DOWNLOAD_URL=https://azhpcstor.blob.core.windows.net/azhpc-images-store/MLNX_OFED_LINUX-5.0-1.0.0.0-ubuntu18.04-x86_64.tgz
+MLNX_OFED_DOWNLOAD_URL=http://content.mellanox.com/ofed/MLNX_OFED-5.0-1.0.0.0/MLNX_OFED_LINUX-5.0-1.0.0.0-ubuntu18.04-x86_64.tgz
 TARBALL=$(basename ${MLNX_OFED_DOWNLOAD_URL})
 MOFED_FOLDER=$(basename ${MLNX_OFED_DOWNLOAD_URL} .tgz)
 wget --retry-connrefused --tries=3 --waitretry=5  $MLNX_OFED_DOWNLOAD_URL
