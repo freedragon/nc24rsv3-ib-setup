@@ -11,17 +11,6 @@ https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi
 ###Intel MPI
 Download your choice of version of Intel MPI. Change the I_MPI_FABRICS environment variable depending on the version. For Intel MPI 2018, use I_MPI_FABRICS=shm:ofa and for 2019, use I_MPI_FABRICS=shm:ofi.
 
-https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/hpc-compute-infiniband-linux#azure-cli
-
-```
-az vm extension set \
-  --resource-group vm-poc-rg \
-  --vm-name ibhost01 \
-  --name InfiniBandDriverLinux \
-  --publisher Microsoft.HpcCompute \
-  --version 1.1 
-```
-
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_infiniband_and_rdma_networks/testing-infiniband-networks_configuring-and-managing-networking
 
 ```
@@ -56,4 +45,17 @@ $ cat /sys/class/infiniband/mlx4_0/ports/1/pkeys/1
 0x7fff
 $ I_MPI_FABRICS=shm:ofi
 $ I_MPI_DEBUG=6 mpirun -v -n 2 -host skt-hpc-test01,skt-hpc-test02 IMB-MPI1 pingpong
+$ I_MPI_DEBUG=4 I_MPI_HYDRA_DEBUG=on FI_LOG_LEVEL=debug mpirun hostname
+```
+
+### MISC attempts (didn't work as expected)
+https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/hpc-compute-infiniband-linux#azure-cli
+
+```
+az vm extension set \
+  --resource-group vm-poc-rg \
+  --vm-name ibhost01 \
+  --name InfiniBandDriverLinux \
+  --publisher Microsoft.HpcCompute \
+  --version 1.1 
 ```
