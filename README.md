@@ -59,3 +59,13 @@ az vm extension set \
   --publisher Microsoft.HpcCompute \
   --version 1.1 
 ```
+
+#### Ubuntu Module Tips for IMPI
+```
+source /etc/profile.d/modules.sh # in case of "command not found"
+
+module load mpi/impi-2019
+...
+module unload mpi/impi-2019
+ ```
+ 
