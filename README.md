@@ -4,7 +4,10 @@
 https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/enable-infiniband
 
 ## Enable Infiniband
+Configuring InfiniBand for Ubuntu HPC and GPU VMs
 https://techcommunity.microsoft.com/t5/azure-compute/configuring-infiniband-for-ubuntu-hpc-and-gpu-vms/ba-p/1221351
+
+For Azure DSVM, it's better to follow the procedure of "SR-IOV enabled VMs with inbox driver" section.
 
 https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi
 
@@ -68,4 +71,11 @@ module load mpi/impi-2019
 ...
 module unload mpi/impi-2019
  ```
+### References
+
+ MLNX_OFED: Firmware - Driver Compatibility Matrix
+ https://www.mellanox.com/support/mlnx-ofed-matrix
+ 
+ For Azure VMs, we can choose 5.0-2.1.8.0 or 5.0-1.0.0.0. But, for my case, rather one installed/ran successfully for vm of ubuntu 18.04 LTS image.
+ 
  
