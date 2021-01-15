@@ -9,14 +9,44 @@
 How to check whether infiniband is working?
 
 1. Check deivce is detected
+
   lspci | grep Mellanox
+  02:00.0 Network controller: Mellanox Technologies MT27500 Family [ConnectX-3]
 
 2. Using ibstat (if driver & support module is installed/loaded properly)
 
+    $ ibstat
+    CA 'mlx4_0'
+            CA type: MT4100
+            Number of ports: 1
+            Firmware version: 2.43.7008
+            Hardware version: 0
+            Node GUID: 0x00155dfffe33ff0c
+            System image GUID: 0x506b4b03004f9753
+            Port 1:
+                    State: Active
+                    Physical state: LinkUp
+                    Rate: 40
+                    Base lid: 46
+                    LMC: 0
+                    SM lid: 2
+                    Capability mask: 0x00010000
+                    Port GUID: 0x00155dfffd33ff0c
+                    Link layer: InfiniBand
+
 3. Run ifconfig
 
+    ib0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 2044
+            inet 172.16.1.3  netmask 255.255.0.0  broadcast 172.16.255.255
+            inet6 fe80::215:5dff:fd33:ff0c  prefixlen 64  scopeid 0x20<link>
+            unspec 00-01-46-CE-FE-80-00-00-00-00-00-00-00-00-00-00  txqueuelen 256  (UNSPEC)
+            RX packets 0  bytes 0 (0.0 B)
+            RX errors 0  dropped 0  overruns 0  frame 0
+            TX packets 12  bytes 928 (928.0 B)
+            TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
-Test Solutions:
+
+Test Solutions (it's working):
 
 1. Intel MPI
 2. OpenMPI
