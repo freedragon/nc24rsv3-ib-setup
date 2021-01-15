@@ -65,3 +65,53 @@ https://github.com/freedragon/nc24rsv3-ib-setup
 (Almost) Original manual setups guide scripts (takes couple of hours to complete because many features are installed)
 https://github.com/freedragon/azhpc-images
 
+
+# Reference:
+# -  https://pytorch.org/get-started/locally/
+#      PyTorch: Stable (1.7.1)
+#      OS : Linux
+#      Package: Conda
+#      Language: Python
+#      Cuda : 10.2
+sudo apt install python \
+                 python3-pip
+
+# The version of Anaconda may be different depending on when you are installing`
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+sh Miniconda3-latest-Linux-x86_64.sh
+
+# NOTE: Python 3.9 users will need to add '-c=conda-forge' for installation
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+pip3 install --upgrade tensorflow-gpu
+
+# -  https://dev.to/evanilukhin/guide-to-install-pytorch-with-cuda-on-ubuntu-18-04-5217
+
+# Install Python3.8
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt install python3.8 python3.8-dev python3.8-venv
+
+# Install CUDA
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pinsudo 
+mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
+sudo apt-get update
+sudo apt-get -y install cuda
+
+# Install pip
+python3.8 -m venv ~/python_env/my_env
+
+source ~/python_env/my_env/bin/activate
+
+# Install PyTorch
+sudo apt install cmake
+git clone --recursive https://github.com/pytorch/pytorch.git
+git submodule sync
+git submodule update --init --recursive
+
+python3.8 -m pip install numpy ninja pyyaml mkl mkl-include setuptools cmake cffi typing
+
+export CMAKE_PREFIX_PATH=${CONDA_PREFIX:-"$(dirname $(which conda))/../"}
+python setup.py install
+
