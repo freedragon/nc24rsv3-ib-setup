@@ -1,0 +1,32 @@
+
+1. Inbox Driver
+  - Azure DSVM Gen 1, 2
+  - HPC Images
+
+2. Install driver manually
+  - 
+
+How to check whether infiniband is working?
+
+1. Check deivce is detected
+  lspci | grep Mellanox
+
+2. Using ibstat (if driver & support module is installed/loaded properly)
+
+3. Run ifconfig
+
+
+Test Solutions:
+
+1. Intel MPI
+2. OpenMPI
+3. Tensorflow
+4. Pytorch
+5. Horovod (Combination of above solutions)
+
+Manual Setup guide and code git repo
+https://github.com/freedragon/nc24rsv3-ib-setup
+
+(Almost) Original manual setups guide scripts (takes couple of hours to complete because many features are installed)
+https://github.com/freedragon/azhpc-images
+
