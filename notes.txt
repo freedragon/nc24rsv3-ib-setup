@@ -4,9 +4,9 @@
   - HPC Images
 
 2. Install driver manually
-  - 
+  - Regular Ubuntu 18.04 LTS
 
-How to check whether infiniband is working?
+How to check whether infiniband is installed and working?
 
 1. Check deivce is detected
 
@@ -34,6 +34,8 @@ How to check whether infiniband is working?
                     Port GUID: 0x00155dfffd33ff0c
                     Link layer: InfiniBand
 
+   If there's no output from ibstat, something is wrong such as HW node fault, SW driver loading faulure, etc.
+
 3. Run ifconfig
 
     ib0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 2044
@@ -45,8 +47,11 @@ How to check whether infiniband is working?
             TX packets 12  bytes 928 (928.0 B)
             TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
+   If there's no ib0 from output of ifconfig, please check openibd is working.
 
-Test Solutions (it's working):
+4. Unfortunately, other testing tools like ibhosts, iblinkinfo, etc were not ran as expected.
+
+Tested Solutions (it's working):
 
 1. Intel MPI
 2. OpenMPI
