@@ -14,6 +14,11 @@ https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi
 ### Intel MPI
 Download your choice of version of Intel MPI. Change the I_MPI_FABRICS environment variable depending on the version. For Intel MPI 2018, use I_MPI_FABRICS=shm:ofa and for 2019, use I_MPI_FABRICS=shm:ofi.
 
+
+### Troubleshooting, Debugging & Connection Test
+
+Use ibstat, ibstatus and/or ibv_devices.
+
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_infiniband_and_rdma_networks/testing-infiniband-networks_configuring-and-managing-networking
 
 ```
@@ -23,8 +28,6 @@ azuser@ibhost01:~$ sudo ibv_devices
     mlx4_0              00155dfffe33ff13
 azuser@ibhost01:~$
 ```
-
-### Troubleshooting, Debugging & Connection Test
 
 Troubleshooting InfiniBand connection issues using OFED tools
 https://software.intel.com/content/www/us/en/develop/articles/troubleshooting-infiniband-connection-issues-using-ofed-tools.html?wapkw=(sl)
