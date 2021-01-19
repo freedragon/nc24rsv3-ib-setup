@@ -11,7 +11,7 @@ For Azure DSVM, it's better to follow the procedure of "SR-IOV enabled VMs with 
 
 https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi
 
-###Intel MPI
+### Intel MPI
 Download your choice of version of Intel MPI. Change the I_MPI_FABRICS environment variable depending on the version. For Intel MPI 2018, use I_MPI_FABRICS=shm:ofa and for 2019, use I_MPI_FABRICS=shm:ofi.
 
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_infiniband_and_rdma_networks/testing-infiniband-networks_configuring-and-managing-networking
