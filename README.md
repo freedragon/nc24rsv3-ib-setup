@@ -3,8 +3,7 @@
 [Enable InfiniBand](https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/enable-infiniband)
 
 ## Enable Infiniband
-Configuring InfiniBand for Ubuntu HPC and GPU VMs
-https://techcommunity.microsoft.com/t5/azure-compute/configuring-infiniband-for-ubuntu-hpc-and-gpu-vms/ba-p/1221351
+[Configuring InfiniBand for Ubuntu HPC and GPU VMs](https://techcommunity.microsoft.com/t5/azure-compute/configuring-infiniband-for-ubuntu-hpc-and-gpu-vms/ba-p/1221351)
 
 For Azure DSVM, it's better to follow the procedure of "SR-IOV enabled VMs with inbox driver" section.
 
@@ -28,18 +27,13 @@ azuser@ibhost01:~$ sudo ibv_devices
 azuser@ibhost01:~$
 ```
 
-Troubleshooting InfiniBand connection issues using OFED tools
-https://software.intel.com/content/www/us/en/develop/articles/troubleshooting-infiniband-connection-issues-using-ofed-tools.html?wapkw=(sl)
+[Troubleshooting InfiniBand connection issues using OFED tools](https://software.intel.com/content/www/us/en/develop/articles/troubleshooting-infiniband-connection-issues-using-ofed-tools.html?wapkw=(sl))
 
-InfiniBand Command Examples
-https://docs.oracle.com/cd/E19914-01/820-6705-10/appendix2.html
+[InfiniBand Command Examples](https://docs.oracle.com/cd/E19914-01/820-6705-10/appendix2.html)
 
-CHAPTER 6. TESTING INFINIBAND NETWORKS
-https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_infiniband_and_rdma_networks/testing-infiniband-networks_configuring-and-managing-networking
+[TESTING INFINIBAND NETWORKS](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_infiniband_and_rdma_networks/testing-infiniband-networks_configuring-and-managing-networking)
 
-Tips for Working with OFED 1.4 (Old version)
-https://www.openfabrics.org/downloads/OFED/archive/ofed-1.4/OFED-1.4-docs/OFED_tips.txt
-
+[Tips for Working with OFED 1.4 (Old version)](https://www.openfabrics.org/downloads/OFED/archive/ofed-1.4/OFED-1.4-docs/OFED_tips.txt)
 
 ```
 $ cat /sys/class/infiniband/mlx4_0/ports/1/pkeys/
