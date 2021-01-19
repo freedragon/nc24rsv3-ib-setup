@@ -1,7 +1,6 @@
 # NC24rs_v3 Infiniband setup poc scripts
 
-
-https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/enable-infiniband
+[Enable InfiniBand](https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/enable-infiniband)
 
 ## Enable Infiniband
 Configuring InfiniBand for Ubuntu HPC and GPU VMs
@@ -9,17 +8,17 @@ https://techcommunity.microsoft.com/t5/azure-compute/configuring-infiniband-for-
 
 For Azure DSVM, it's better to follow the procedure of "SR-IOV enabled VMs with inbox driver" section.
 
-https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi
+[Set up Message Passing Interface for HPC](https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi)
 
 ### Intel MPI
-Download your choice of version of Intel MPI. Change the I_MPI_FABRICS environment variable depending on the version. For Intel MPI 2018, use I_MPI_FABRICS=shm:ofa and for 2019, use I_MPI_FABRICS=shm:ofi.
 
+Download your choice of version of Intel MPI. Change the I_MPI_FABRICS environment variable depending on the version. For Intel MPI 2018, use I_MPI_FABRICS=shm:ofa and for 2019, use I_MPI_FABRICS=shm:ofi.
 
 ### Troubleshooting, Debugging & Connection Test
 
 Use ibstat, ibstatus and/or ibv_devices.
 
-https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_infiniband_and_rdma_networks/testing-infiniband-networks_configuring-and-managing-networking
+[TESTING INFINIBAND NETWORKS](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_infiniband_and_rdma_networks/testing-infiniband-networks_configuring-and-managing-networking)
 
 ```
 azuser@ibhost01:~$ sudo ibv_devices
@@ -55,7 +54,8 @@ $ I_MPI_DEBUG=4 I_MPI_HYDRA_DEBUG=on FI_LOG_LEVEL=debug mpirun hostname
 ```
 
 ### MISC attempts (didn't work as expected)
-https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/hpc-compute-infiniband-linux#azure-cli
+
+[InfiniBand Driver Extension for Linux/Azure CLI](https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/hpc-compute-infiniband-linux#azure-cli)
 
 ```
 az vm extension set \
@@ -76,31 +76,28 @@ module unload mpi/impi-2019
  ```
 ### References
 
- MLNX_OFED: Firmware - Driver Compatibility Matrix
- https://www.mellanox.com/support/mlnx-ofed-matrix
+ [MLNX_OFED: Firmware - Driver Compatibility Matrix](https://www.mellanox.com/support/mlnx-ofed-matrix)
  
  For Azure VMs, we can choose 5.0-2.1.8.0 or 5.0-1.0.0.0. But, for my case, rather one installed/ran successfully for vm of ubuntu 18.04 LTS image.
  
  
-AzureML Distributed Learning Utilities
-https://azure.github.io/azureml-examples/docs/cheatsheet/distributed-training/#azureml-distributed-learning-utilities
+[AzureML Distributed Learning Utilities](https://azure.github.io/azureml-examples/docs/cheatsheet/distributed-training/#azureml-distributed-learning-utilities)
 
-Environment Variables from OpenMPI
-https://azure.github.io/azureml-examples/docs/cheatsheet/distributed-training/#environment-variables-from-openmpi
+[Environment Variables from OpenMPI](https://azure.github.io/azureml-examples/docs/cheatsheet/distributed-training/#environment-variables-from-openmpi)
 
 ```
 I_MPI_DEBUG=4 I_MPI_HYDRA_DEBUG=on FI_LOG_LEVEL=debug mpirun  -v -n 2 -ppn 1 -host skt-hpc-test01,skt-hpc-test02 IMB-MPI1 pingpong
 
 mpirun -np 2 --map-by node --hostfile ~/hostfile -mca pml ucx --mca btl ^vader,tcp,openib -x UCX_NET_DEVICES=mlx4_0:1  -x UCX_IB_PKEY=0x0003  ./osu_latency
 
-
-https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi
+[Set up Message Passing Interface for HPC](https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi)
 
 mpirun -v -np 4 --map-by node -H skt-dsvm01:2,skt-dsvm02:2  -mca pml ucx --mca btl ^vader,tcp,openib -x UCX_NET_DEVICES=mlx4_0:1  -x UCX_IB_PKEY=0x0004,0x0005 uname -r
 mpirun --verbose -np 4 --map-by node -H skt-dsvm01:2,skt-dsvm02:2  -mca pml ucx --mca btl ^vader,tcp,openib -x UCX_NET_DEVICES=mlx4_0:1 hostname
+```
 
-https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi#discover-partition-keys
-
+[Set up Message Passing Interface for HPC/Discover partition keys](https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi#discover-partition-keys)
+```
 dsvm01:~$ cat /sys/class/infiniband/mlx4_0/ports/1/pkeys/0
 0x8004
 dsvm01:~$ cat /sys/class/infiniband/mlx4_0/ports/1/pkeys/1
@@ -110,10 +107,11 @@ dsvm02:~$ cat /sys/class/infiniband/mlx4_0/ports/1/pkeys/0
 0x8005
 dsvm02:~$ cat /sys/class/infiniband/mlx4_0/ports/1/pkeys/1
 0x7fff
+```
 
-https://docs.oracle.com/cd/E19923-01/820-6793-10/mca-params.html
+[Using MCA Parameters With mpirun}(https://docs.oracle.com/cd/E19923-01/820-6793-10/mca-params.html)
 
-
+```
 mpirun -np 8 \
     -H skt-dsvm01:4,skt-dsvm01:4 \
     -bind-to none -map-by slot \
@@ -124,7 +122,6 @@ mpirun -np 8 \
 HOROVOD_GPU_OPERATIONS=NCCL 
 
 HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod
-
 
 mpirun -np 8 \
     -H skt-dsvm01:4,skt-dsvm02:4 \
