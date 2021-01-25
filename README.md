@@ -28,11 +28,6 @@ Tested Configurations (images should be Gen1):
  
    > Excuse ***setup-impi.sh*** and reboot.
 
-## Enable Infiniband
-[Configuring InfiniBand for Ubuntu HPC and GPU VMs](https://techcommunity.microsoft.com/t5/azure-compute/configuring-infiniband-for-ubuntu-hpc-and-gpu-vms/ba-p/1221351)
-
-For Azure DSVM, it's better to follow the procedure of "SR-IOV enabled VMs with inbox driver" section.
-
 [Set up Message Passing Interface for HPC](https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi)
 
 When the drivers and configurations applied without problem, ***ifconfig*** will show following interface for infiniband.
@@ -46,10 +41,36 @@ ib0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 2044
         TX packets 28  bytes 2228 (2.2 KB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
+#### Invoking OpenMPI
 
-### Intel MPI
+```
+mpirun -np 8 \
+    -H skt-dsvm01:4,skt-dsvm02:4 \
+    -bind-to none -map-by slot \
+    -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x HOROVOD_MPI_THREADS_DISABLE=1 -x PATH \
+    -mca pml ob1 \
+    python ~/horovod/examples/pytorch/pytorch_mnist.py
+```
 
-Download your choice of version of Intel MPI. Change the I_MPI_FABRICS environment variable depending on the version. For Intel MPI 2018, use I_MPI_FABRICS=shm:ofa and for 2019, use I_MPI_FABRICS=shm:ofi.
+#### Tips for Intel MPI with Ubuntu Module
+```
+source /etc/profile.d/modules.sh # in case of "command not found"
+
+module load mpi/impi-2019
+
+I_MPI_FABRICS=shm:ofi
+I_MPI_DEBUG=6 mpirun -v -n 2 -host skt-hpc-test01,skt-hpc-test02 IMB-MPI1 pingpong
+I_MPI_DEBUG=4 I_MPI_HYDRA_DEBUG=on FI_LOG_LEVEL=debug mpirun hostname
+
+#-host or -H with <hostname or ip>:<# of slots>,...
+I_MPI_DEBUG=4 I_MPI_HYDRA_DEBUG=on FI_LOG_LEVEL=debug mpirun  -v -n 2 -ppn 1 -host <host1-ib0-ip>:4,V<host1-ib0-ip>:4 IMB-MPI1 pingpong
+
+module unload mpi/impi-2019
+ ```
+ 
+### Intel MPI ***(Optional)***
+
+Download Intel MPI above 2019. Change the I_MPI_FABRICS environment variable depending on the version. For Intel MPI 2018, use I_MPI_FABRICS=shm:ofa and for 2019, use I_MPI_FABRICS=shm:ofi.
 
 ### Troubleshooting, Debugging & Connection Test
 
@@ -82,9 +103,6 @@ $ cat /sys/class/infiniband/mlx4_0/ports/1/pkeys/0
 0x8005
 $ cat /sys/class/infiniband/mlx4_0/ports/1/pkeys/1
 0x7fff
-$ I_MPI_FABRICS=shm:ofi
-$ I_MPI_DEBUG=6 mpirun -v -n 2 -host skt-hpc-test01,skt-hpc-test02 IMB-MPI1 pingpong
-$ I_MPI_DEBUG=4 I_MPI_HYDRA_DEBUG=on FI_LOG_LEVEL=debug mpirun hostname
 ```
 
 ### MISC attempts (didn't work as expected)
@@ -100,14 +118,12 @@ az vm extension set \
   --version 1.1 
 ```
 
-#### Ubuntu Module Tips for IMPI
-```
-source /etc/profile.d/modules.sh # in case of "command not found"
+## Enable Infiniband
+[Configuring InfiniBand for Ubuntu HPC and GPU VMs](https://techcommunity.microsoft.com/t5/azure-compute/configuring-infiniband-for-ubuntu-hpc-and-gpu-vms/ba-p/1221351)
 
-module load mpi/impi-2019
-...
-module unload mpi/impi-2019
- ```
+For Azure DSVM, it's better to follow the procedure of "SR-IOV enabled VMs with inbox driver" section.
+
+
 ### References
 
  [MLNX_OFED: Firmware - Driver Compatibility Matrix](https://www.mellanox.com/support/mlnx-ofed-matrix)
