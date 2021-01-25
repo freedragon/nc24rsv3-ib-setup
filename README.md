@@ -26,7 +26,7 @@ Tested Configurations (images should be Gen1):
 
  - Create Azure HPC VMs with [Ubuntu Server 18.04-LTS](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage)
  
-   > Excuse setup-impi.sh and reboot.
+   > Excuse ***setup-impi.sh*** and reboot.
 
 ## Enable Infiniband
 [Configuring InfiniBand for Ubuntu HPC and GPU VMs](https://techcommunity.microsoft.com/t5/azure-compute/configuring-infiniband-for-ubuntu-hpc-and-gpu-vms/ba-p/1221351)
@@ -35,11 +35,25 @@ For Azure DSVM, it's better to follow the procedure of "SR-IOV enabled VMs with 
 
 [Set up Message Passing Interface for HPC](https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi)
 
+When the drivers and configurations applied without problem, ***ifconfig*** will show following interface for infiniband.
+```
+ib0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 2044
+        inet 172.16.1.23  netmask 255.255.0.0  broadcast 172.16.255.255
+        inet6 fe80::215:5dff:fd33:ff20  prefixlen 64  scopeid 0x20<link>
+        unspec 00-0B-E9-8D-FE-80-00-00-00-00-00-00-00-00-00-00  txqueuelen 256  (UNSPEC)
+        RX packets 14  bytes 1092 (1.0 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 28  bytes 2228 (2.2 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+
 ### Intel MPI
 
 Download your choice of version of Intel MPI. Change the I_MPI_FABRICS environment variable depending on the version. For Intel MPI 2018, use I_MPI_FABRICS=shm:ofa and for 2019, use I_MPI_FABRICS=shm:ofi.
 
 ### Troubleshooting, Debugging & Connection Test
+
+[How To Enable, Verify and Troubleshoot RDMA](https://community.mellanox.com/s/article/How-To-Enable-Verify-and-Troubleshoot-RDMA)
 
 Use ibstat, ibstatus and/or ibv_devices.
 
