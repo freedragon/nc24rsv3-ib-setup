@@ -74,7 +74,7 @@ Download Intel MPI above 2019. Change the I_MPI_FABRICS environment variable dep
 
 ### Troubleshooting, Debugging & Connection Test
 
-[How To Enable, Verify and Troubleshoot RDMA](https://community.mellanox.com/s/article/How-To-Enable-Verify-and-Troubleshoot-RDMA)
+[How To Enable, Verify and Troubleshoot RDMA](https://community.mellanox.com/s/article/How-To-Enable-Verify-and-Troubleshoot-RDMA#jive_content_id_RDMA_Verification)
 
 Use ibstat, ibstatus and/or ibv_devices.
 
