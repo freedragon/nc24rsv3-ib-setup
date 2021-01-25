@@ -1,7 +1,7 @@
 # NC24rs_v3 Infiniband setup poc scripts
 
 Base information:
-  [Enable InfiniBand](https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/enable-infiniband)
+  [Configuring InfiniBand for Ubuntu HPC and GPU VMs](https://techcommunity.microsoft.com/t5/azure-compute/configuring-infiniband-for-ubuntu-hpc-and-gpu-vms/ba-p/1221351)
 
 Tested Configurations (images should be Gen1):
 
