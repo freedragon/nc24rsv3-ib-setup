@@ -5,7 +5,7 @@ Base information:
 
 Tested Configurations (images should be Gen1):
 
--  Create Azure HPC VMs of images with Infiniband Driver.
+-  Create Azure HPC VMs of images with Infiniband Driver (e.g., [Azure DSVM](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/overview))
 
    1. Load following kernel modules (either mpdprob or edit /etc/modules)
 
@@ -24,7 +24,7 @@ Tested Configurations (images should be Gen1):
 
     4. The IB interface ib0 should come up with an RDMA IP address.
 
- - Create Azure HPC VMs with Ubuntu 18.04
+ - Create Azure HPC VMs with [Ubuntu Server 18.04-LTS](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage)
  
    > Excuse setup-impi.sh and reboot.
 
