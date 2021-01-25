@@ -9,24 +9,24 @@ Tested Configurations (images should be Gen1):
 
    1. Load following kernel modules (either mpdprob or edit /etc/modules)
 
-        ib_uverbs
-        rdma_ucm
-        ib_umad
-        ib_ipoib
+   > ib_uverbs
+   > rdma_ucm
+   > ib_umad
+   > ib_ipoib
 
     2. In /etc/waagent.conf, enable RDMA by uncommenting the following configuration lines (root access)
 
-        OS.EnableRDMA=y
+    > OS.EnableRDMA=y
 
     3. Reboot VM
 
-        sudo reboot
+    > sudo reboot
 
     4. The IB interface ib0 should come up with an RDMA IP address.
 
  - Create Azure HPC VMs with Ubuntu 18.04
  
-   Excuse setup-impi.sh and reboot.
+   > Excuse setup-impi.sh and reboot.
 
 ## Enable Infiniband
 [Configuring InfiniBand for Ubuntu HPC and GPU VMs](https://techcommunity.microsoft.com/t5/azure-compute/configuring-infiniband-for-ubuntu-hpc-and-gpu-vms/ba-p/1221351)
