@@ -58,8 +58,9 @@ source /etc/profile.d/modules.sh # in case of "command not found"
 
 module load mpi/impi-2019
 
-I_MPI_FABRICS=shm:ofi
-I_MPI_DEBUG=6 mpirun -v -n 2 -host skt-hpc-test01,skt-hpc-test02 IMB-MPI1 pingpong
+~~I_MPI_FABRICS=shm:ofi~~
+I_MPI_DEBUG=6 mpirun -v -n 2 -host hpc-test01,hpc-test02 IMB-MPI1 pingpong
+
 I_MPI_DEBUG=4 I_MPI_HYDRA_DEBUG=on FI_LOG_LEVEL=debug mpirun hostname
 
 #-host or -H with <hostname or ip>:<# of slots>,...
