@@ -9,9 +9,9 @@ Tested Configurations (images should be Gen1):
 
    1. Load following kernel modules (either mpdprob or edit /etc/modules)
 
-   > ib_uverbs
-   > rdma_ucm
-   > ib_umad
+   > ib_uverbs   
+   > rdma_ucm   
+   > ib_umad   
    > ib_ipoib
 
     2. In /etc/waagent.conf, enable RDMA by uncommenting the following configuration lines (root access)
