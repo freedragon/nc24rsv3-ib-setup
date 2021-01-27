@@ -5,7 +5,7 @@ Base information:
 
 Tested Configurations (images should be Gen1):
 
--  Create Azure HPC VMs of images with Infiniband Driver (e.g., [Azure DSVM](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/overview))
+-  Azure HPC VMs of images with Infiniband Driver (e.g., [Azure DSVM](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/overview))
 
    1. Load following kernel modules (either mpdprob or edit /etc/modules)
 
@@ -24,9 +24,11 @@ Tested Configurations (images should be Gen1):
 
     4. The IB interface ib0 should come up with an RDMA IP address.
 
- - Create Azure HPC VMs with [Ubuntu Server 18.04-LTS](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage)
+ - Azure HPC VMs with [Ubuntu Server 18.04-LTS](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage)
  
    > Excuse ***setup-impi.sh*** and reboot.
+
+**Except for use-cases with [CycleCloud](https://azure.microsoft.com/en-us/features/azure-cyclecloud/), Gen1 VM should be deployed to have working infiniband connectivity (as of Jan. 2021)**
 
 [Set up Message Passing Interface for HPC](https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/hpc/setup-mpi)
 
